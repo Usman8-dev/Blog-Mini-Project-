@@ -48,6 +48,39 @@ app.post('/Register', async(req, res) => {
         });
 })
 
+app.get('/login', function(req, res){
+    res.render('login');
+})
+
+app.post('/login', async(req, res) => {
+
+     let{email, password} = req.body;
+    
+    // check user is already register 
+    let user =await userModel.findOne({ email: email });
+    if (!user) {
+            return res.status(400).send("Please try again !");
+        }
+    
+    bcrypt.compare(password, user.password, function(err, result) {
+    if(result){
+          // to set a token cookie 
+            let token = jwt.sign({ email: user.email }, 'shhhhhh');
+            res.cookie('token', token);
+
+        // res.send("Welcome To dashboad", req.body.username);
+         res.send(`Welcome to dashboard, ${user.name}`); 
+    }else{
+        res.send("Please try again !!!");
+
+    }
+    });
+})
+
+app.get('/logout', function(req, res){
+    res.cookie('token', "");
+    res.redirect('/login');
+})
 
 
 
