@@ -1,0 +1,196 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Profile Header */
+.profile-header {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.user-info h1 {
+    font-size: 1.8rem;
+    color: #2d1b4e;
+    margin-bottom: 4px;
+}
+
+.username {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.bio {
+    color: #777;
+    font-size: 0.95rem;
+}
+
+.new-post-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.new-post-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Posts Section */
+.posts-container {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.posts-container h2 {
+    font-size: 1.6rem;
+    color: #2d1b4e;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.post-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.post-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.post-title {
+    font-size: 1.3rem;
+    color: #2d1b4e;
+    font-weight: 600;
+}
+
+.post-date {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.post-content {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.post-actions {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+}
+
+.like-btn, .edit-btn {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.like-btn {
+    background: #f0f4ff;
+}
+
+.like-btn:hover {
+    background: #e0e8ff;
+}
+
+.edit-btn {
+    background: #fff3cd;
+    color: #d4a017;
+}
+
+.edit-btn:hover {
+    background: #ffeaa7;
+}
+
+.logout {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.logout a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.logout a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    .new-post-btn {
+        width: 100%;
+    }
+}

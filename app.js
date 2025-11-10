@@ -69,7 +69,8 @@ app.post('/login', async(req, res) => {
             res.cookie('token', token);
 
         // res.send("Welcome To dashboad", req.body.username);
-         res.send(`Welcome to dashboard, ${user.name}`); 
+        //  res.send(`Welcome to dashboard, ${user.name}`); 
+         res.redirect('mainprofile'); 
     }else{
         res.send("Please try again !!!");
 
@@ -82,14 +83,20 @@ app.get('/logout', function(req, res){
     res.redirect('/login');
 })
 
-app.get('/profile',IsLoginUser, function(req, res){
-   console.log(req.user);
+app.get('/mainprofile',IsLoginUser, async(req, res) =>{
+    let user = await userModel.findOne({email: req.user.email});
+   res.render('mainProfile', {user});
+})
+
+app.get('/profile',IsLoginUser, async(req, res)=>{
+     let user = await userModel.findOne({email: req.user.email});
+    res.render('profile',{user});
 })
 
 // middleware 
 function IsLoginUser(req, res, next){
     if(req.cookies.token === ""){
-        res.send('Please Login First');
+        res.redirect('login');
     }else{
         let data = jwt.verify(req.cookies.token, 'shhhhhh');
         req.user = data;
