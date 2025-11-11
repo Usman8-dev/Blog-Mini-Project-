@@ -89,9 +89,25 @@ app.get('/mainprofile',IsLoginUser, async(req, res) =>{
 })
 
 app.get('/profile',IsLoginUser, async(req, res)=>{
-     let user = await userModel.findOne({email: req.user.email});
+     let user = await userModel.findOne({email: req.user.email}).populate('posts');
     res.render('profile',{user});
 })
+// create post 
+app.post('/createPost',IsLoginUser, async(req, res)=>{
+     let user = await userModel.findOne({email: req.user.email});
+
+     let {name, content} = req.body;
+     let post = await postModel.create({
+        user: user._id,
+        name: name,
+        content: content
+     })
+
+     user.posts.push(post._id);
+     await user.save();
+     res.redirect('/profile');
+})
+
 
 // middleware 
 function IsLoginUser(req, res, next){

@@ -1,3 +1,4 @@
+const { name } = require('ejs');
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
@@ -9,6 +10,7 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: Date.now
    },
+   name: String,
    content: String,
    likes: {
         type: mongoose.Schema.Types.ObjectId,

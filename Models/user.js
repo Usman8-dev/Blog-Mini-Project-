@@ -7,10 +7,10 @@ const userSchema = mongoose.Schema({
     password: String,
     age: Number,
     gender: String,
-    posts: {
+    posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'post'
-    }
+    }]
 })
 
 module.exports = mongoose.model('user', userSchema);

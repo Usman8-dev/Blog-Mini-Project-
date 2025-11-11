@@ -27,51 +27,27 @@
         <!-- Posts Section -->
         <div class="posts-container">
             <h2>Your Posts</h2>
-
-            <!-- Sample Post 1 -->
-            <div class="post-card">
-                <div class="post-header">
-                    <h3 class="post-title">My First Day with Node.js</h3>
-                    <span class="post-date">Nov 10, 2025</span>
-                </div>
-                <p class="post-content">
-                    Today I started learning Node.js and Express. It's amazing how easy it is to build a backend server! I created my first API route and connected it to MongoDB. Feeling excited!
-                </p>
-                <div class="post-actions">
-                    <a href="#" class="like-btn">Like (12)</a>
-                    <a href="#" class="edit-btn">Edit</a>
-                </div>
-            </div>
-
-            <!-- Sample Post 2 -->
-            <div class="post-card">
-                <div class="post-header">
-                    <h3 class="post-title">Why I Love Tailwind CSS</h3>
-                    <span class="post-date">Nov 8, 2025</span>
-                </div>
-                <p class="post-content">
-                    No more writing tons of CSS! With Tailwind, I can style directly in HTML and ship faster. The utility-first approach changed how I think about design systems.
-                </p>
-                <div class="post-actions">
-                    <a href="#" class="like-btn">Like (8)</a>
-                    <a href="#" class="edit-btn">Edit</a>
-                </div>
-            </div>
-
-            <!-- Sample Post 3 -->
-            <div class="post-card">
-                <div class="post-header">
-                    <h3 class="post-title">Deploying to Vercel in 2 Minutes</h3>
-                    <span class="post-date">Nov 5, 2025</span>
-                </div>
-                <p class="post-content">
-                    Just pushed my project to GitHub and connected it to Vercel. One click → live in seconds! The preview URLs for pull requests are a game-changer for team workflows.
-                </p>
-                <div class="post-actions">
-                    <a href="#" class="like-btn">Like (15)</a>
-                    <a href="#" class="edit-btn">Edit</a>
-                </div>
-            </div>
+                <% if(user.posts.length > 0 ){ %>
+                    <% user.posts.forEach(function(post){ %>
+                            <!-- Sample Post 1 -->
+                                        <div class="post-card">
+                                            <div class="post-header">
+                                                <h3 class="post-title"><%= post.name %></h3>
+                                                <span class="post-date"><%= post.date.toString().slice(0, 21) %></span>
+                                            </div>
+                                            <p class="post-content">
+                                                <%= post.content %>
+                                            </p>
+                                            <div class="post-actions">
+                                                <a href="#" class="like-btn">Like (12)</a>
+                                                <a href="#" class="edit-btn">Edit</a>
+                                            </div>
+                                        </div>
+                            <% }) %>
+                <% }else{ %>
+                No Post yet!!
+                <% } %>
+        
         </div>
 
         <!-- Logout -->
