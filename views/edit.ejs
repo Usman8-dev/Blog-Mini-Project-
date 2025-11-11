@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Post | TechFlow</title>
+    <link rel="stylesheet" href="/stylesheets/EditStyle.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="edit-container">
+        <div class="edit-card">
+            <div class="card-header">
+                <h1>Edit Your Post</h1>
+                <p>Make it better. Inspire the world.</p>
+            </div>
+            <form action="/update/<%= post._id%>" method="POST" class="edit-form">
+
+            <div class="input-field">
+                <label for="name">Post Title</label>
+                <input type="text" id="name" name="name" value="<%= post.name%>" placeholder="Enter title..."
+                    required />
+            </div>
+
+            <div class="input-field">
+                <label for="content">Post Content</label>
+                <textarea id="content" name="content" rows="10" placeholder="Write your story..."
+                    required><%= post.content %></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="save-btn">Save Changes</button>
+                <a href="/profile" class="cancel-btn">Cancel</a>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

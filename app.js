@@ -108,6 +108,26 @@ app.post('/createPost',IsLoginUser, async(req, res)=>{
      res.redirect('/profile');
 })
 
+// edit form show 
+app.get('/edit/:id', IsLoginUser,async(req, res) =>{
+     let post = await postModel.findById(req.params.id);
+    res.render('edit', {post});
+})
+// update post 
+app.post('/update/:id', IsLoginUser,async(req, res) =>{
+   let {name, content} = req.body;
+
+   let updatePost = await postModel.findOneAndUpdate(
+    { 
+           _id : req.params.id   
+    },{
+    name: name,
+    content: content,
+   })
+   res.redirect('/profile');
+})
+
+
 
 // middleware 
 function IsLoginUser(req, res, next){

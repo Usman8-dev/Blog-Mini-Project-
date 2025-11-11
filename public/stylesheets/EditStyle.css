@@ -1,0 +1,166 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    min-height: 100vh;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.edit-container {
+    width: 100%;
+    max-width: 800px;
+    perspective: 1000px;
+}
+
+.edit-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+    transition: all 0.4s ease;
+}
+
+.edit-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.card-header p {
+    color: #a0a0a0;
+    font-size: 1rem;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-field {
+    position: relative;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #c0c0c0;
+    font-size: 0.95rem;
+}
+
+.input-field input,
+.input-field textarea {
+    width: 100%;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    resize: vertical;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+    outline: none;
+    border-color: #00d2ff;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.input-field textarea {
+    min-height: 180px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.save-btn,
+.cancel-btn {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 210, 255, 0.3);
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 210, 255, 0.4);
+}
+
+.cancel-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .edit-card {
+        padding: 30px 25px;
+    }
+    .card-header h1 {
+        font-size: 1.8rem;
+    }
+    .form-actions {
+        flex-direction: column;
+    }
+    .save-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+}

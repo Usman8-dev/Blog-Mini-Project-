@@ -28,7 +28,7 @@
         <div class="posts-container">
             <h2>Your Posts</h2>
                 <% if(user.posts.length > 0 ){ %>
-                    <% user.posts.forEach(function(post){ %>
+                    <% user.posts.reverse().    forEach(function(post){ %>
                             <!-- Sample Post 1 -->
                                         <div class="post-card">
                                             <div class="post-header">
@@ -40,7 +40,7 @@
                                             </p>
                                             <div class="post-actions">
                                                 <a href="#" class="like-btn">Like (12)</a>
-                                                <a href="#" class="edit-btn">Edit</a>
+                                                <a href="/edit/<%= post._id %>" class="edit-btn">Edit</a>
                                             </div>
                                         </div>
                             <% }) %>
