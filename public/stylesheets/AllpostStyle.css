@@ -1,0 +1,234 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* User Info Bar */
+.user-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.label {
+    font-weight: 600;
+    color: #555;
+}
+
+.value {
+    color: #2d1b4e;
+    font-weight: 500;
+}
+
+.profile-link {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+}
+
+.profile-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: #2d1b4e;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Posts Grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.post-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* Post Author */
+.post-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.author-name {
+    font-weight: 600;
+    color: #2d1b4e;
+    font-size: 0.95rem;
+}
+
+.post-date {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+/* Post Content */
+.post-content {
+    flex-grow: 1;
+    margin-bottom: 16px;
+}
+
+.post-title {
+    font-size: 1.25rem;
+    color: #2d1b4e;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.post-content p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Post Actions */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.read-more, .edit-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.read-more {
+    background: #f0f4ff;
+    color: #667eea;
+}
+
+.read-more:hover {
+    background: #e0e8ff;
+}
+
+.edit-link {
+    background: #fff3cd;
+    color: #d4a017;
+}
+
+.edit-link:hover {
+    background: #ffeaa7;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    grid-column: 1 / -1;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.new-post-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.new-post-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-info-bar {
+        flex-direction: column;
+        text-align: center;
+    }
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+}

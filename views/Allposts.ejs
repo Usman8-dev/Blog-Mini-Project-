@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>All Posts | TechFlow</title>
+    <link rel="stylesheet" href="/stylesheets/AllpostStyle.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- User Info Header -->
+        <div class="user-info-bar">
+            <div class="info-item">
+                <span class="label">Current Time:</span>
+                <span class="value" id="current-time">Loading...</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Country:</span>
+                <span class="value">PK</span>
+            </div>
+            <a href="/profile" class="profile-link">My Profile</a>
+        </div>
+
+        <!-- Page Title -->
+        <header class="page-header">
+            <h1>All Posts</h1>
+            <p>Explore what everyone is sharing</p>
+        </header>
+
+        <!-- Posts Grid -->
+        <div class="posts-grid">
+            <% if (Allpost && Allpost.length > 0) { %>
+                <% Allpost.forEach(post => { %>
+                    <article class="post-card">
+                        <div class="post-author">
+                            <div class="avatar">
+                                <%= post.user?.name?.charAt(0).toUpperCase() || 'A' %>
+                            </div>
+                            <div>
+                                <h4 class="author-name"><%= post.user?.name || 'Anonymous' %></h4>
+                                <span class="post-date">
+                                    <%= new Date(post.createdAt).toLocaleDateString('en-US', {
+                                        month: 'short',
+                                        day: 'numeric',
+                                        year: 'numeric'
+                                    }) %>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="post-content">
+                            <h3 class="post-title"><%= post.name %></h3>
+                            <p><%= post.content.length > 200 ? post.content.substring(0, 200) + '...' : post.content %></p>
+                        </div>
+
+                   
+                    </article>
+                <% }) %>
+            <% } else { %>
+                <div class="empty-state">
+                    <p>No posts yet. Be the first to share!</p>
+                    <a href="/mainprofile" class="new-post-btn">+ Create Post</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Auto-update clock -->
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            const dateString = now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('current-time').textContent = `${dateString} - ${timeString}`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

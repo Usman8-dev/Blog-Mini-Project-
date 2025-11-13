@@ -119,7 +119,7 @@ app.post('/update/:id', IsLoginUser,async(req, res) =>{
 
    let updatePost = await postModel.findOneAndUpdate(
     { 
-           _id : req.params.id   
+    _id : req.params.id  
     },{
     name: name,
     content: content,
@@ -127,7 +127,12 @@ app.post('/update/:id', IsLoginUser,async(req, res) =>{
    res.redirect('/profile');
 })
 
+// show all post 
+app.get('/', async(req, res)=>{
 
+    let Allpost = await postModel.find().populate();
+    res.render('Allposts', {Allpost})
+})
 
 // middleware 
 function IsLoginUser(req, res, next){
