@@ -12,8 +12,28 @@
         <!-- Profile Header -->
         <div class="profile-header">
             <div class="user-info">
-                <div class="avatar">
-                    <span></span>
+                <!-- <div class="avatar">
+                    <span> <img src="/images/uploads/<%= user.profilePicture %>" alt=""> </span>
+                    <a href="/showPic">change profile image icon</a>
+                </div> -->
+                <div class="avatar-container">
+                    <!-- Avatar Image -->
+                    <div class="avatar">
+                        <img 
+                            src="/images/uploads/<%= user.profilePicture || 'default-avatar.png' %>" 
+                            alt="<%= user.name %>'s profile picture"
+                            class="avatar-img"
+                            onerror="this.src='/images/default-avatar.png'"
+                        />
+                        
+                        <!-- Change Icon Overlay -->
+                        <a href="/showPic" class="change-photo-overlay" title="Change Profile Picture">
+                            <i class="fas fa-camera"></i>
+                        </a>
+                    </div>
+
+                    <!-- Optional: Username below -->
+                    <p class="username">@<%= user.username || user.email.split('@')[0] %></p>
                 </div>
                 <div>
                     <h1> <%= user.name %></h1>
@@ -21,7 +41,11 @@
                     <!-- <p class="bio">Full-stack developer | Coffee addict | Building cool things</p> -->
                 </div>
             </div>
-            <a href="/mainprofile" class="new-post-btn">+ New Post</a>
+            <div>
+
+                <a href="/mainprofile" class="new-post-btn">+ New Post</a>
+                <a href="/" class="new-post-btn">Back</a>
+            </div>
         </div>
 
         <!-- Posts Section -->

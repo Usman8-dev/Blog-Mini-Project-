@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Upload Image | TechFlow</title>
+    <link rel="stylesheet" href="/stylesheets/ImageProfile.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="upload-container">
+        <div class="upload-card">
+            <div class="card-header">
+                <h1>Upload Your Image</h1>
+                <p>Drag & drop or click to select</p>
+            </div>
+
+            <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="17 8 12 3 7 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="12" y1="3" x2="12" y2="15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p>Drop your image here</p>
+                        <span>or click to browse</span>
+                    </div>
+                    <input type="file" name="image" id="fileInput" accept="image/*" required />
+                </div>
+
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+
+                <button type="submit" class="upload-btn" id="uploadBtn">
+                    <span class="btn-text">Upload Image</span>
+                    <div class="ripple"></div>
+                </button>
+            </form>
+
+            <a href="/profile" class="back-link">Back to Profile</a>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const uploadForm = document.getElementById('uploadForm');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        // Open file picker on click
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag & Drop Effects
+        ['dragenter', 'dragover'].forEach(event => {
+            dropZone.addEventListener(event, (e) => {
+                e.preventDefault();
+                dropZone.classList.add('drag-over');
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(event => {
+            dropZone.addEventListener(event, (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+            });
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length) {
+                fileInput.files = files;
+                updateFileName(files[0].name);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                updateFileName(fileInput.files[0].name);
+            }
+        });
+
+        function updateFileName(name) {
+    const content = dropZone.querySelector('.drop-content');
+    content.innerHTML = `
+        <p><strong>${name}</strong></p>
+        <span class="file-selected">Ready to upload</span>
+    `;
+
+    // Prevent re-selection
+    dropZone.style.pointerEvents = 'none';
+    dropZone.style.opacity = '0.85';
+    dropZone.classList.add('file-selected');
+}
+
+        // Upload with Progress
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(uploadForm);
+
+            progressContainer.style.display = 'flex';
+            uploadBtn.disabled = true;
+            uploadBtn.classList.add('uploading');
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/upload', true);
+
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const percent = (e.loaded / e.total) * 100;
+                    progressFill.style.width = percent + '%';
+                    progressText.textContent = Math.round(percent) + '%';
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    setTimeout(() => {
+                        window.location.href = '/profile';
+                    }, 800);
+                } else {
+                    alert('Upload failed!');
+                    resetForm();
+                }
+            };
+
+            xhr.send(formData);
+        });
+
+        function resetForm() {
+            uploadBtn.disabled = false;
+            uploadBtn.classList.remove('uploading');
+            progressContainer.style.display = 'none';
+            progressFill.style.width = '0%';
+            progressText.textContent = '0%';
+        }
+
+        // Ripple Effect
+        uploadBtn.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            const rect = uploadBtn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            uploadBtn.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        });
+    </script>
+</body>
+</html>

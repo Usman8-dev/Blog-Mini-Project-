@@ -10,7 +10,11 @@ const userSchema = mongoose.Schema({
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'post'
-    }]
+    }],
+    profilePicture :{
+        type: String,
+        default: 'default.jpg'
+    }
 })
 
 module.exports = mongoose.model('user', userSchema);

@@ -6,6 +6,7 @@ const postModel = require('./Models/post');
 const bcrypt  = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const multerUploadPic = require('./config/multer');
 
 app.set('view engine', 'ejs');
 
@@ -130,10 +131,22 @@ app.post('/update/:id', IsLoginUser,async(req, res) =>{
 // show all post 
 app.get('/', async(req, res)=>{
 
-    let Allpost = await postModel.find().populate();
+    let Allpost = await postModel.find().populate('user');
+    // console.log(Allpost);
     res.render('Allposts', {Allpost})
 })
 
+// show profile pic page 
+app.get('/showPic', function(req, res){
+    res.render('ImageProfile')
+})
+// save profile pic 
+app.post('/upload', IsLoginUser ,multerUploadPic.single('image'), async(req, res)=>{
+    let user = await userModel.findOne({email: req.user.email});
+    user.profilePicture = req.file.filename;
+    await user.save();
+    res.redirect('/profile');
+})
 // middleware 
 function IsLoginUser(req, res, next){
     if(req.cookies.token === ""){
